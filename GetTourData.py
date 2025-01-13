@@ -90,5 +90,5 @@ def Main():
     # CSV 저장
     SaveToCsv(allData)
 
-if __name__ == "__Main__":
+if __name__ == "__main__":
     Main()
