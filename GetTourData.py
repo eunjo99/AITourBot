@@ -2,10 +2,15 @@ import requests
 import xmltodict
 import numpy as np
 import pandas as pd
+from dotenv import load_dotenv
+import os
+
+# .env 파일에서 환경 변수 로드
+load_dotenv()
 
 # API 관련 정보
 API_URL = 'http://api.data.go.kr/openapi/tn_pubr_public_trrsrt_api'
-API_KEY = 'dCFfL1h1/vq0CZCZeUrfil0zO7OPzVQm+42mrbMGz+V1gsirHXJ89fqCU3RXAO4sc8SsK7LCrQpKI1cygL3fAw=='
+API_KEY = os.getenv('API_KEY')
 
 def GetTotalCnt() -> int:
     """
