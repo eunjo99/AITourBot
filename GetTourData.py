@@ -10,7 +10,7 @@ load_dotenv()
 
 # API 관련 정보
 API_URL = 'http://api.data.go.kr/openapi/tn_pubr_public_trrsrt_api'
-API_KEY = os.getenv('API_KEY')
+API_KEY = os.getenv('DATA_API_KEY')
 
 def GetTotalCnt() -> int:
     """
