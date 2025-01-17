@@ -1,4 +1,6 @@
 import streamlit as st
+from RunLLM import GetAIResponse
+
 
 # 페이지 설정
 def SetupPage():
@@ -28,11 +30,12 @@ def ProcessUserInput():
             st.write(strUserQuestion)
         st.session_state.listMessage.append({"role": "user", "content": strUserQuestion})
         
-        # AI 응답 처리 (추후 AI 로직 연동 가능)
-        with st.chat_message("ai"):
-            strAIResponse = "여기는 AI 메세지가 올 예정"
-            st.write(strAIResponse)
-        st.session_state.listMessage.append({"role": "ai", "content": strAIResponse})
+        with st.spinner("답변을 생성하는 중입니다!!!"):
+            ai_response = GetAIResponse(strUserQuestion)
+            # AI 응답 처리 (추후 AI 로직 연동 가능)
+            with st.chat_message("ai"):
+                ai_message = st.write_stream(ai_response)  
+                st.session_state.listMessage.append({"role":"ai", "content":ai_message})
 
 # 메인 함수
 def Main():
