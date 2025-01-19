@@ -31,16 +31,14 @@ def CreateSessionHistory(sessionId: str) -> BaseChatMessageHistory:
 # 사용자 질문을 처리하거나 그대로 반환하는 사전 기반 체인 생성 함수
 def CreateDictionaryChain(): 
     llm = GetLLM()
-    dictionary = []
     
     dictionaryPrompt = ChatPromptTemplate.from_template("""
         사용자의 질문으로 보고, 우리의 사전을 참고해서 사용자의 질문을 변경해주세요.
         만약 변경할 필요가 없다고 판단된다면, 사용자의 질문을 변경하지 않아도 됩니다.
         그런 경우에는 질문만 리턴해주세요.
         
-        사전: {dictionary}
                 
-        질문: {{question}}""")   # 프롬프트 템플릿 -> 사용자 질문을 입력받아 처리 방법을 언어 모델에 지시
+        질문: {question}""")   # 프롬프트 템플릿 -> 사용자 질문을 입력받아 처리 방법을 언어 모델에 지시
     
     dictionaryChain = dictionaryPrompt | llm | StrOutputParser()  # 입력된 질문 템플릿에 삽입 -> 템플릿 처리한 적절한 질문 생성 -> 결과를 문자열로 변환.
     
